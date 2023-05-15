@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Axios from 'axios';
 import { DateTime } from 'luxon'
@@ -8,12 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import axios from 'axios';
+import { AuthContext } from '../../helpers/AuthContext'
 
 function Event() {
   let { id } = useParams();
   const [eventObject, setEventObject] = useState({});
   const [formattedSchedule, setFormattedSchedule] = useState('')
   const [isRegistered, setIsRegistered] = useState(false)
+  const { authState } = useContext(AuthContext)
 
   const [rows, setRows] = useState([]);
   const [gridKey, setGridKey] = useState(0);
@@ -139,7 +141,7 @@ function Event() {
   return (
     <main>
 
-      <div className="overflow-auto" style={{ height: "94vh" }}>
+      <div className="overflow-auto" style={{ height: "86vh" }}>
 
         <div className="container py-5">
           <div className="p-4 p-md-5 mb-4 rounded text-bg-dark" style={{ position: "relative" }}>
@@ -148,12 +150,14 @@ function Event() {
               <p className="blog-post-meta" style={{ color: 'white', width: '90%' }}>{formattedSchedule}</p>
               <span className="badge text-bg-primary">{eventObject?.category?.toUpperCase()}</span>
               <p className="blog-post-meta" style={{ color: 'white' }}>{eventObject.description}</p>
-              {isRegistered && (
-                <button onClick={leave} className='btn btn-secondary position-absolute bottom-0 end-0 mx-5 mb-5'>Cancel Registration</button>
-              )}
-              {!isRegistered && (
-                <button onClick={register} className='btn btn-primary position-absolute bottom-0 end-0 mx-5 mb-5'>Register</button>
-              )}
+              
+                            {isRegistered && (
+                              <button onClick={leave} className='btn btn-secondary position-absolute bottom-0 end-0 mx-5 mb-5'>Cancel Registration</button>
+                            )}
+                            {!isRegistered && (
+                              <button onClick={register} className='btn btn-primary position-absolute bottom-0 end-0 mx-5 mb-5'>Register</button>
+                            )}
+
             </div>
           </div>
         </div>
@@ -165,20 +169,25 @@ function Event() {
           </blockquote>
         </div>
 
-        <div className="container px-4">
-          <Box sx={{ paddingX: '2rem', paddingY: '1rem' }}>
-            <div style={{ height: 400, width: '100%' }}>
-              <DataGrid
-                key={gridKey}
-                rows={rows}
-                columns={columns}
-                checkboxSelection
-                disableRowSelectionOnClick
-              />
-            </div>
-          </Box>
-        </div>
+        {(authState?.roles?.includes('ORGANIZER'))&&(
+                    <div className="container px-4">
+                    <Box sx={{ paddingX: '2rem', paddingY: '1rem' }}>
+                      <div style={{ height: 400, width: '100%' }}>
+                        <DataGrid
+                          key={gridKey}
+                          rows={rows}
+                          columns={columns}
+                          checkboxSelection
+                          disableRowSelectionOnClick
+                        />
+                      </div>
+                    </Box>
+                  </div>
+            
+        )}
 
+        
+  
       </div>
 
     </main>

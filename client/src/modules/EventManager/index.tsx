@@ -101,7 +101,7 @@ function EventManager() {
         )}
       
 
-      {(authState?.roles?.includes('ORGANIZER')||authState?.roles?.includes('APPROVER'))&&(
+      {(authState?.roles?.includes('ORGANIZER'))&&(
         <button onClick={toggleModal} className='m-5' style={{ position: "fixed", bottom: "0px", right: "0px", width: "4rem", height: "4rem", borderRadius: "50px", padding: "10px 10px" }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-plus-lg" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />

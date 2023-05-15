@@ -25,7 +25,7 @@ function Events() {
     // })}
     return (
         <main>  
-            <div className="row g-0 overflow-auto" style={{ height: "94vh" }}>
+            <div className="row g-0 overflow-auto" style={{ height: "86vh" }}>
                 <div className="col-9 p-2 d-flex flex-column">
                     <h1 className='text-center'>Upcoming Events</h1>
                     <div className="album py-3 bg-body-tertiary rounded shadow-sm mt-3">
