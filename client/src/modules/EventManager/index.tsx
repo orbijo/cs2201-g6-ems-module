@@ -9,10 +9,13 @@ import { DateTime } from "luxon";
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { AuthContext } from '../../helpers/AuthContext'
+import './index.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 
 function EventManager() {
+ 
+  const isActive = (path) => location.pathname === path;
   const { setAuthState } = useContext(AuthContext)
   const { authState } = useContext(AuthContext)
 
@@ -25,11 +28,7 @@ function EventManager() {
   const toggleModal = () => {
     setModalState(!isModalOpen)
   }
-  const isActive = (path: string) => {
-    const currpath = "/event-manager/" + path;
-    console.log(currpath, location.pathname);
-    return location.pathname === "/event-manager/" + path
-  }
+  
 
   const initialValues = {
     eventName: "",
@@ -79,20 +78,17 @@ function EventManager() {
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossOrigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossOrigin="anonymous"></script>
       <div className="bg-body-tertiary d-flex align-items-center nav shadow-sm" style={{ paddingLeft: "20px", height: "3rem" }}>
+      <Link to="/event-manager/events" className={`mx-3 text-decoration-none ${isActive('/event-manager/events') ? 'bold-link' : 'text-dark'}`}>Events</Link>
+      {authState?.roles?.includes('APPROVER') && (
+        <Link to="/event-manager/approve" className={`mx-3 text-decoration-none ${isActive('/event-manager/approve') ? 'bold-link' : 'text-secondary'}`}>For Approval</Link>
+      )}
+      {!authState.status ? (
+        <Link to="/login" className={`mx-3 text-decoration-none ${isActive('/login') ? 'bold-link' : 'text-secondary'}`}>Login</Link>
+      ) : (
+        <a href="" onClick={logout} className="mx-3 text-decoration-none text-secondary">Logout</a>
+      )}
+    </div>
 
-        <Link to='/event-manager/events' className='mx-3 text-decoration-none text-dark'>Events</Link>
-        {
-          authState?.roles?.includes('APPROVER') && (<Link to='/event-manager/approve' className='mx-3 text-decoration-none text-secondary'>For Approval</Link>)
-        }
-
-        {!authState.status ? (
-          <Link to='/login' className='mx-3 text-decoration-none text-secondary'>Login</Link>
-        ) : (
-          <a href="" onClick={logout} className="mx-3 text-decoration-none text-secondary">Logout</a>
-        )}
-
-
-      </div>
       
       {!authState?.status ? (
           <div></div>

@@ -92,3 +92,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.nav .active-link {
+  background-color: blue;
+  /* Add any other styles you want for the active link */
+}
+

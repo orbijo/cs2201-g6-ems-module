@@ -1,0 +1,13 @@
+.bold-link {
+    font-weight: bold;
+  }
+  
+  .nav a {
+    color: #999999;
+    text-decoration: none;
+  }
+  
+  .nav a.bold-link {
+    color: #000000;
+  }
+  
