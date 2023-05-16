@@ -9,10 +9,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ApproveList = () => {
     const [rows, setRows] = useState([]);
     const [gridKey, setGridKey] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchRows();
@@ -32,7 +34,7 @@ const ApproveList = () => {
     const onButtonClickView = (e: React.MouseEvent<HTMLButtonElement>, row: any): void => {
         e.stopPropagation();
         //do whatever you want with the row
-        alert(`Redirecting to event: ${row.id}`);
+        navigate(`/event-manager/event/${row.id}`);
     };
 
     const onButtonClickApprove = (e: React.MouseEvent<HTMLButtonElement>, row: any): void => {
@@ -98,6 +100,12 @@ const ApproveList = () => {
                     onClick={(e: React.MouseEvent<HTMLButtonElement>) => onButtonClickDeny(e, params.row)}
                 >
                     <DeleteIcon />
+                </IconButton>
+                <IconButton
+                    color="primary"
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => onButtonClickView(e, params.row)}
+                >
+                    <VisibilityIcon />
                 </IconButton>
             </strong>
         );

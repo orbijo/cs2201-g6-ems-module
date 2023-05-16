@@ -150,6 +150,9 @@ function Event() {
               <p className="blog-post-meta" style={{ color: 'white', width: '90%' }}>{formattedSchedule}</p>
               <span className="badge text-bg-primary">{eventObject?.category?.toUpperCase()}</span>
               <p className="blog-post-meta" style={{ color: 'white' }}>{eventObject.description}</p>
+
+              {authState?.roles?.includes('PARTICIPANT')&&(
+              <div className="">
               
                             {isRegistered && (
                               <button onClick={leave} className='btn btn-secondary position-absolute bottom-0 end-0 mx-5 mb-5'>Cancel Registration</button>
@@ -158,6 +161,8 @@ function Event() {
                               <button onClick={register} className='btn btn-primary position-absolute bottom-0 end-0 mx-5 mb-5'>Register</button>
                             )}
 
+            </div>
+            )}
             </div>
           </div>
         </div>

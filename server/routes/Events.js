@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
             }
         }
     })
+    console.log("otin");
     res.json(allApprovedEvents)
 })
 
@@ -57,6 +58,7 @@ router.post("/", validateToken, async (req, res) => {
         about,
         category
     } = req.body
+
     const OrganizerId = req.user.id
 
     dt = DateTime.fromISO(schedule, { zone: 'utc' })

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Axios from 'axios';
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation, useMatch } from 'react-router-dom'
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
 import { colors } from "../../constants/colors";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -54,7 +54,6 @@ function EventManager() {
   };
 
   const onSubmit = (data: any) => {
-    console.log(data)
     Axios.post('http://localhost:8080/events', data, {
       headers: {
         accessToken: localStorage.getItem('accessToken')
