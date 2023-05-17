@@ -10,4 +10,12 @@
   .nav a.bold-link {
     color: #000000;
   }
+
+  .evt{
+    background-color: white;
+    transition: 0.4s;
+  }
   
+  .evt:hover{
+    background-color: #f2f2f2;
+  }

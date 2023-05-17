@@ -1,5 +1,6 @@
 import React from "react";
-import { FiBell, FiUser, FiLogOut } from "react-icons/fi";
+import { FiBell, FiUser, FiLogOut, FiLogIn } from "react-icons/fi";
+import { Link, Outlet, useLocation, useMatch } from 'react-router-dom'
 import logo from "../assets/DCISM_LOGO.png";
 import { useOutlet } from "react-router-dom";
 import { colors } from "../constants/colors";
@@ -11,9 +12,7 @@ function SignedOutLayout() {
       <div style={styles.topNav}>
         <img src={logo} style={styles.logo} />
         <div style={{ marginLeft: "auto" }}>
-          <FiBell style={styles.icon} />
-          <FiUser style={styles.icon} />
-          <FiLogOut style={styles.icon} />
+          <Link to="/login"><FiLogIn style={styles.icon} /></Link>
         </div>
       </div>
       <div style={styles.secondTopNav}>

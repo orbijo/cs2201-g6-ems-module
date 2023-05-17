@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from 'react'
 import { useOutlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/DCISM_LOGO.png";
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
@@ -10,6 +10,7 @@ function SignedInLayout() {
   const outlet = useOutlet();
   const navigate = useNavigate();
   const location = useLocation();
+
 
   return (
     <div>

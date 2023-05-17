@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     res.json(allApprovedEvents)
 })
 
-// Fetch all unapproved events
+// Fetch all unapproved events  
 router.get('/approve', async (req, res) => {
     const allForApproval = await Event.findAll({
         where: {
