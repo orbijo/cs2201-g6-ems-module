@@ -106,13 +106,44 @@ function Event() {
     }
   };
 
+  const unmarkAttendance = (e: React.MouseEvent<HTMLButtonElement>, row: any): void => {
+    e.stopPropagation();
+    const data = {
+      attendedAt: new Date()
+    }
+    //do whatever you want with the row
+    if (confirm(`Unmark the attendance of ID Number:${row.id_num}?`)) {
+      try {
+        axios.post(
+          `http://localhost:8080/events/unverify/${id}/${row.id}`,
+          data,
+          {
+            headers: {
+              accessToken: localStorage.getItem('accessToken'),
+            },
+          },
+        );
+
+        // update or refresh the rows
+        fetchRows();
+        forceUpdate();
+      } catch (error) {
+        console.error('Error: ', error)
+      }
+    } else {
+
+    }
+  };
+
   const renderDetailsButton = (params: any) => {
     const isAttended = params.row.EventParticipant.attendedAt !== null;
     return (
       <strong>
         {isAttended ? (
           <IconButton
-            color="secondary">
+            color="secondary"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => unmarkAttendance(e, params.row)}
+            >
             
             <HowToRegIcon />
           </IconButton>
@@ -129,10 +160,10 @@ function Event() {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'id_num', headerName: 'ID Number', width: 140 },
-    { field: 'first_name', headerName: 'First Name', width: 140 },
-    { field: 'last_name', headerName: 'Last Name', width: 140 },
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'id_num', headerName: 'ID Number', width: 240 },
+    { field: 'first_name', headerName: 'First Name', width: 240 },
+    { field: 'last_name', headerName: 'Last Name', width: 240 },
     {
       field: 'is Attended',
       headerName: 'Attended',

@@ -59,21 +59,17 @@ function Events() {
     //     return 'item'
     // })}
 
-    let availE = null, 
+    let availE = <div className="d-flex justify-content-center align-items-center" style={{height:"60.5vh"}}>
+                <p className='text-center' style={{fontWeight:0, fontSize:"1.5rem"}}>No Upcoming Events</p>
+                </div>,
     
     hapnow = <div className="d-flex justify-content-center align-items-center py-4" style={{height:"100%"}}>
                 <p className="text-center" style={{fontSize:"1.5rem", fontWeight:"", margin: 0}}>No events happening</p>
              </div>;
 
-    if(eventAvail){
-       availE = <div className="d-flex justify-content-center align-items-center" style={{height:"60.5vh"}}>
-                <p className='text-center' style={{fontWeight:0, fontSize:"1.5rem"}}>No Upcoming Events</p>
-                </div>
-    }
-    else{
+    if(!eventAvail){
 
-    
-      availE = <div className="container">
+        availE = <div className="container">
                   <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     
                     {allEvents.map((value, key) => {

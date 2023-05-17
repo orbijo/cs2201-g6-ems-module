@@ -1,16 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { useOutlet, useNavigate, useLocation } from "react-router-dom";
+import {Link, useOutlet, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/DCISM_LOGO.png";
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
 import { colors } from "../constants/colors";
 import { SignedInLinks } from "../constants/links";
 import { getLinkClass } from "../helpers/functions";
+import { AuthContext } from "../helpers/AuthContext";
+
 
 function SignedInLayout() {
   const outlet = useOutlet();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { setAuthState } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    setAuthState({
+      ...authState,
+      status: false
+    });
+  };
 
   return (
     <div>
@@ -19,7 +31,7 @@ function SignedInLayout() {
         <div style={{ marginLeft: "auto" }}>
           <FiBell style={styles.navIcon} />
           <FiUser style={styles.navIcon} />
-          <FiLogOut style={styles.navIcon} />
+          <Link to="" onClick={logout}><FiLogOut style={styles.navIcon} /></Link>
         </div>
       </div>
       <div style={styles.sideNav}>

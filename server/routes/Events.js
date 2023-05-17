@@ -151,6 +151,33 @@ router.post('/verify/:eventId/:participantId', async (req, res) => {
     }
 });
 
+router.post('/unverify/:eventId/:participantId', async(req,res)=>{
+    try {
+        const { eventId, participantId } = req.params;
+    
+        // Find the event participant record
+        const eventParticipant = await EventParticipant.findOne({
+            where: {
+                UserId: participantId,
+                EventId: eventId
+            }
+        });
+
+        if (!eventParticipant) {
+            return res.status(404).json({ message: 'Event participant not found.' });
+        }
+
+        // Update the attendedAt value
+        eventParticipant.attendedAt = null;
+        await eventParticipant.save();
+
+        return res.status(200).json(eventParticipant);
+    } catch (error) {
+        console.error('Error updating attendance:', error);
+        return res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
 
 router.get('/check-registration/:id', validateToken, async (req, res) => {
     const eventId = req.params.id
