@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useReducer } from 'react'
 import { useParams } from 'react-router-dom'
 import Axios from 'axios';
 import { DateTime } from 'luxon'
@@ -16,6 +16,7 @@ function Event() {
   const [formattedSchedule, setFormattedSchedule] = useState('')
   const [isRegistered, setIsRegistered] = useState(false)
   const { authState } = useContext(AuthContext)
+  const [reducerValue, forceUpdate] = useReducer(x=>x+1,0); 
 
   const [rows, setRows] = useState([]);
   const [gridKey, setGridKey] = useState(0);
@@ -46,7 +47,7 @@ function Event() {
       setIsRegistered(response.data.isRegistered);
     });
 
-  }, [])
+  }, [reducerValue])
 
   const register = () => {
     Axios.post(`http://localhost:8080/events/join/${id}`, null, {
@@ -96,6 +97,7 @@ function Event() {
 
         // update or refresh the rows
         fetchRows();
+        forceUpdate();
       } catch (error) {
         console.error('Error: ', error)
       }
@@ -111,6 +113,7 @@ function Event() {
         {isAttended ? (
           <IconButton
             color="secondary">
+            
             <HowToRegIcon />
           </IconButton>
         ) : (

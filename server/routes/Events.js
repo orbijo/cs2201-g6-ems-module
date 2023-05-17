@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
             }
         }
     })
-    console.log("otin");
     res.json(allApprovedEvents)
 })
 
@@ -128,7 +127,7 @@ router.post('/verify/:eventId/:participantId', async (req, res) => {
     try {
         const { eventId, participantId } = req.params;
         const { attendedAt } = req.body;
-
+    
         // Find the event participant record
         const eventParticipant = await EventParticipant.findOne({
             where: {
@@ -151,6 +150,7 @@ router.post('/verify/:eventId/:participantId', async (req, res) => {
         return res.status(500).json({ message: 'Internal server error.' });
     }
 });
+
 
 router.get('/check-registration/:id', validateToken, async (req, res) => {
     const eventId = req.params.id

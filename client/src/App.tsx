@@ -24,6 +24,7 @@ import Approve from './modules/EventManager/Approve';
 import ApproveList from './modules/EventManager/ApproveList'
 import Events from "./modules/EventManager/Events";
 import Event from "./modules/EventManager/Event";
+import EventsList from "./modules/EventManager/EventsList";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             <Route path="/event-manager" element={<EventManager />}>
               <Route path="events" element={<Events />} />
               <Route path="event/:id" element={<Event />} />
+              <Route path="events-list" element={<EventsList />} />
               <Route path="approve/" element={<ApproveList />} />
               <Route path="approve/:id" element={<Approve />} />
             </Route>
