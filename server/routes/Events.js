@@ -33,10 +33,7 @@ router.get('/history', async (req, res) => {
     const allForApproval = await Event.findAll({
         where: {
             status: {
-                [Op.or]:{
-                    [Op.eq]:'Approved',
-                    [Op.ne]:'Declined'
-                }
+                [Op.eq]:'Approved'
             }
         }
     })

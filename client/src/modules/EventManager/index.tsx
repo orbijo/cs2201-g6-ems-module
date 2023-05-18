@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useReducer} from 'react'
 import Axios from 'axios';
 import { Link, Outlet, useLocation, useMatch } from 'react-router-dom'
 import { FiUser, FiLogOut, FiBell } from "react-icons/fi";
@@ -18,6 +18,10 @@ function EventManager() {
   const isActive = (path) => location.pathname === path;
   const { setAuthState } = useContext(AuthContext)
   const { authState } = useContext(AuthContext)
+  const [count, setCount] = useState(0);
+  const [allEvents, setAllEvents] = useState([]);
+  const [data, setData] = useState([]);
+
 
   const location = useLocation();
   const [isModalOpen, setModalState] = React.useState(false);
@@ -29,7 +33,19 @@ function EventManager() {
     setModalState(!isModalOpen)
   }
   
+  useEffect(() => {
+    Axios.get("http://localhost:8080/events/approve").then((response) => {
+        setAllEvents(response.data)
 
+        let ctr = 0;
+        response.data.map((value)=>{
+            // console.log(value.schedule);
+            // console.log(DateTime.now())\
+            ctr++;            
+        })
+        setCount(ctr);
+    })
+}, [])
   const initialValues = {
     eventName: "",
     description: "",
@@ -85,10 +101,17 @@ function EventManager() {
       )}
 
       {authState?.roles?.includes('APPROVER') && (
-        <div className="">
-        <Link to="/event-manager/approve" className={`mx-3 text-decoration-none ${isActive('/event-manager/approve') ? 'bold-link' : 'text-secondary'}`}>For Approval</Link>
+        <div className="d-flex">
+        <Link to="/event-manager/approve" style={{width:`${count != 0 ?'8.2rem':'7rem'}`}} className={`mx-3 text-decoration-none ${isActive('/event-manager/approve') ? 'bold-link' : 'text-secondary'}`}><div className="d-flex">For Approval 
+        {count!=0 && (
+          <div className="bg-danger" style={{borderRadius: "50%",width: "1.5rem", height: "1.5rem", marginLeft: "8px"}}>
+            <p className='text-center text-white'>{count}</p>
+          </div>
+        )}
+        </div></Link>
+  
 
-        <Link to="/event-manager/history" className={`mx-3 text-decoration-none ${isActive('/event-manager/history') ? 'bold-link' : 'text-secondary'}`}>Approvals History</Link>
+        <Link to="/event-manager/history" className={`text-decoration-none ${isActive('/event-manager/history') ? 'bold-link' : 'text-secondary'}`}>Approvals History</Link>
         </div>
       )}
 

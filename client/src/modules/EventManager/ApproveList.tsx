@@ -8,13 +8,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ApproveList = () => {
     const [rows, setRows] = useState([]);
     const [gridKey, setGridKey] = useState(0);
     const navigate = useNavigate();
+    const [reducerValue, forceUpdate] = useReducer(x=>x+1,0); 
 
     useEffect(() => {
         fetchRows();
