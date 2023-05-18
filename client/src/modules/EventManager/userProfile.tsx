@@ -1,6 +1,7 @@
 import React from 'react'
 import './userProfile.css';
-function userProfile() {
+
+function UserProfile() {
   return (
     <div> <main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossOrigin="anonymous"></script>
@@ -118,4 +119,4 @@ function userProfile() {
   )
 }
 
-export default userProfile
+export default UserProfile

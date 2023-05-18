@@ -207,8 +207,8 @@ function Event() {
             <p className="text-center mb-0">{eventObject.about}</p>
           </blockquote>
         </div>
-
-        {(authState?.roles?.includes('ORGANIZER'))&&(
+  
+        {(authState?.roles?.includes('ORGANIZER') && authState?.id === eventObject?.OrganizerId)&&(
                     <div className="container px-4">
                     <Box sx={{ paddingX: '2rem', paddingY: '1rem' }}>
                       <div style={{ height: 400, width: '100%' }}>

@@ -135,6 +135,7 @@ const ApproveList = () => {
     ];
 
     return (
+
         <Box sx={{ paddingX: '2rem', paddingY: '1rem' }}>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid

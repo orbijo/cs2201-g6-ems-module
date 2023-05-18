@@ -20,11 +20,12 @@ import Grievances from "./modules/Grievances";
 import RoomIssues from "./modules/RoomIssues";
 import SeatingAssignment from "./modules/SeatingAssignment";
 
-import Approve from './modules/EventManager/Approve';
+import History from './modules/EventManager/history';
 import ApproveList from './modules/EventManager/ApproveList'
 import Events from "./modules/EventManager/Events";
 import Event from "./modules/EventManager/Event";
 import EventsList from "./modules/EventManager/EventsList";
+import UserProfile from "./modules/EventManager/userProfile";
 
 
 function App() {
@@ -77,7 +78,8 @@ function App() {
               <Route path="event/:id" element={<Event />} />
               <Route path="events-list" element={<EventsList />} />
               <Route path="approve/" element={<ApproveList />} />
-              <Route path="approve/:id" element={<Approve />} />
+              <Route path="history" element={<History />} />
+              <Route path="profile" element={<UserProfile/>} />
             </Route>
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/grievances" element={<Grievances />} />

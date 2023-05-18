@@ -17,6 +17,7 @@ function EventsList() {
     const TodayTime = DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE);
 
     const { authState } = useContext(AuthContext)
+      
 
 
     let navigate = useNavigate();
@@ -80,7 +81,17 @@ function EventsList() {
                                <div className="card-body">
                                    <h5 className="card-title">{value.eventName}</h5>
                                    <p className="card-text">{value.description}</p>
+                                   <div className="d-flex justify-content-between align-items-center">
+                                    <div className="">
                                    <a className="btn btn-primary" onClick={()=>{navigate(`/event-manager/event/${value.id}`)}} >Go to page</a>
+                                   </div>
+                                   {value.status.includes('Approved')?(
+                                     <p className='text-success' style={{fontSize:"22px", margin:0}}>{value.status}</p>
+                                   ):(
+                                    <p className='text-danger' style={{fontSize:"22px", margin:0}}>{value.status}</p>
+                                   )}
+                                   
+                                   </div>
                                </div>
                            </div>
                        )}

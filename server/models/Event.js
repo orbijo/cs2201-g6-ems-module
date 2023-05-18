@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         category: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        status:{
+            type: DataTypes.STRING,
+            defaultValue: "Pending"  
         }
     }, {
         paranoid: true

@@ -8,6 +8,7 @@ import './index.css';
 
 function Events() {
 
+
     const [allEvents, setAllEvents] = useState([]);
     const [formattedSchedule, setFormattedSchedule] = useState('');
     const [eventAvail, setEventAvail] = useState(false);
@@ -28,7 +29,7 @@ function Events() {
                 // console.log(DateTime.now())
 
                 const scheduleDateTime = DateTime.fromISO(value.schedule);
-                const formattedDateTime = scheduleDateTime.toLocaleString(DateTime.DATETIME_FULL);
+                const formattedDateTime = scheduleDateTime.toLocaleString(DateTime.DATETIME_MED);
 
                 const EventDate = scheduleDateTime.toLocaleString(DateTime.DATE_MED);
                 const EventTime = scheduleDateTime.toLocaleString(DateTime.TIME_24_SIMPLE);
@@ -67,14 +68,15 @@ function Events() {
                 <p className="text-center" style={{fontSize:"1.5rem", fontWeight:"", margin: 0}}>No events happening</p>
              </div>;
 
+    let count =0;
     if(!eventAvail){
-
         availE = <div className="container">
                   <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    
+                         
                     {allEvents.map((value, key) => {
-
+ 
                         if(TodayDate <= DateTime.fromISO(value.schedule).toLocaleString(DateTime.DATE_MED)){
+                            count+=1;
                         return (
                             <div className="card mx-1">
                                 <img src="http://www.w3.org/2000/svg" className="card-img-top" alt="..." height="225"></img>
@@ -88,7 +90,6 @@ function Events() {
                     })}
                 </div>
             </div>
-
     if(formattedSchedule!=''){
 
       hapnow = <div className="">
@@ -114,6 +115,13 @@ function Events() {
         }
     }
 
+    if(count === 0){
+        availE = <div className="d-flex justify-content-center align-items-center" style={{height:"60.5vh"}}>
+                <p className='text-center' style={{fontWeight:0, fontSize:"1.5rem"}}>No Upcoming Events</p>
+                </div>
+        count = 0;
+    }
+
     return (
         <main>  
             <div className="row g-0 overflow-auto" style={{ height: "86vh" }}>
@@ -122,6 +130,7 @@ function Events() {
                     <div className="album py-3 bg-body-tertiary rounded shadow-sm mt-3"> 
 
                     {availE}
+                    
 
                     </div>
                 </div>

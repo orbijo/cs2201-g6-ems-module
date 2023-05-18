@@ -85,14 +85,18 @@ function EventManager() {
       )}
 
       {authState?.roles?.includes('APPROVER') && (
+        <div className="">
         <Link to="/event-manager/approve" className={`mx-3 text-decoration-none ${isActive('/event-manager/approve') ? 'bold-link' : 'text-secondary'}`}>For Approval</Link>
+
+        <Link to="/event-manager/history" className={`mx-3 text-decoration-none ${isActive('/event-manager/history') ? 'bold-link' : 'text-secondary'}`}>Approvals History</Link>
+        </div>
       )}
 
-      {!authState.status ? (
+      {/* {!authState.status ? (
         <Link to="/login" className={`mx-3 text-decoration-none ${isActive('/login') ? 'bold-link' : 'text-secondary'}`}>Login</Link>
       ) : (
         <a href="" onClick={logout} className="mx-3 text-decoration-none text-secondary">Logout</a>
-      )}
+      )} */}
     </div>
 
       
@@ -103,7 +107,7 @@ function EventManager() {
         )}
       
 
-      {(authState?.roles?.includes('ORGANIZER'))&&(
+      {(authState?.roles?.includes('ORGANIZER')&& isActive('/event-manager/events-list'))&&(
         <button onClick={toggleModal} className='m-5' style={{ position: "fixed", bottom: "0px", right: "0px", width: "4rem", height: "4rem", borderRadius: "50px", padding: "10px 10px" }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-plus-lg" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
@@ -112,7 +116,7 @@ function EventManager() {
       )}
       
 
-
+      
       {isModalOpen && (
         <div style={{ width: "100vw", height: "100vw", top: 0, left: 0, right: 0, bottom: 0, position: 'fixed' }}>
           <div onClick={toggleModal} style={{ width: "100vw", height: "100vw", top: 0, left: 0, right: 0, bottom: 0, position: 'fixed', background: "rgba(49,49,49,0.8)", zIndex: "-1" }}>

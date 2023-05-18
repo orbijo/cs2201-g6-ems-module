@@ -29,11 +29,25 @@ router.get('/approve', async (req, res) => {
     res.json(allForApproval)
 })
 
+router.get('/history', async (req, res) => {
+    const allForApproval = await Event.findAll({
+        where: {
+            status: {
+                [Op.or]:{
+                    [Op.eq]:'Approved',
+                    [Op.ne]:'Declined'
+                }
+            }
+        }
+    })
+    res.json(allForApproval)
+})
+
 // Approve event by id
 router.post('/approve/:id', validateToken, async (req, res) => {
     const id = req.params.id
     const ApproverId = req.user.id
-    const result = await Event.update({ ApproverId: ApproverId }, {
+    const result = await Event.update({ ApproverId: ApproverId, status: "Approved" }, {
         where: {
             id: id
         }

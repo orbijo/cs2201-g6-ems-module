@@ -30,7 +30,7 @@ function SignedInLayout() {
         <img src={logo} style={styles.logo} />
         <div style={{ marginLeft: "auto" }}>
           <FiBell style={styles.navIcon} />
-          <FiUser style={styles.navIcon} />
+          <Link to="/event-manager/profile"><FiUser style={styles.navIcon} /></Link>
           <Link to="" onClick={logout}><FiLogOut style={styles.navIcon} /></Link>
         </div>
       </div>
